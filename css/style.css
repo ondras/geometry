@@ -1,0 +1,45 @@
+body {
+	font-family: georgia;
+	background-color: #ccc;
+	text-shadow: 0px 1px 1px white;
+}
+
+canvas {
+	border: 1px solid black;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px black;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+h1 {
+	text-align: center;
+}
+
+#join-content {
+	margin: auto;
+	width: 60%;
+}
+
+#join {
+	font-size: 150%;
+	text-shadow: 0px 1px 1px white;
+	font-weight: bold;
+}
+
+#game-content {
+	text-align: center;
+}
+
+#controls {
+	position: absolute;
+	left: 10px;
+	top: 150px;
+	text-align: left;
+}
+
+#timer {
+	font-size: 100px;
+	margin-bottom: 10px;
+}

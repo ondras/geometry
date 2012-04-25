@@ -1,0 +1,79 @@
+<?doctype html?>
+<html>
+	<head>
+		<script src="js/oz.js"></script>
+		<script src="js/canvas.js"></script>
+		<script src="js/geometry.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<h1>Geometry wars</h1>
+		<table id="join-content">
+			<tr>
+				<td>Nick:</td>
+				<td><input id="nick" type="text" value="" autofocus="autofocus" /></td>
+			</tr>
+			<tr>
+				<td>Game name:</td>
+				<td><input id="game" type="text" value="test" /></td>
+			</tr>
+			<tr>
+				<td>Round length:</td>
+				<td><select id="length">
+					<option value="10">10</option>
+					<option value="15" selected="selected">15</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+				</select> seconds (only for newly created games)</td>
+			</tr>
+			<tr>
+				<td>Color:</td>
+				<td><select id="color">
+					<option value="#f00">red</option>
+					<option value="#800000">maroon</option>
+					<option value="#ffa500">orange</option>
+					<option value="#ff0">yellow</option>
+					<option value="#808000">olive</option>
+					<option value="#0f0">lime</option>
+					<option value="#008000">green</option>
+					<option value="#0ff">aqua</option>
+					<option value="#008080">teal</option>
+					<option value="#00f">blue</option>
+					<option value="#000080">navy</option>
+					<option value="#f0f">fuchsia</option>
+					<option value="#800080">purple</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="button" id="join" value="Create ~ Join" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<h2>Rules</h2>
+					Each turn, every player draws a <strong>line</strong> and a <strong>circle</strong>.<br/>
+					You <em>earn points for your line</em> (longer line &ndash; more points), but only when it's not <em>crossed by enemy circle</em>&hellip;
+				</td>
+			</tr>
+		</table>
+		<div id="game-content">
+			<div id="timer"></div>
+			<canvas id="canvas"></canvas>
+			<p id="instructions"></p>
+
+			<div id="controls">
+				<h2 id="game-title"></h2>
+				<ul id="players"></ul>
+				<input type="button" id="leave" value="Leave the game" />
+			</div>
+		</div>
+		<script>new Geometry();</script>
+
+	</body>
+</html>
