@@ -1,9 +1,7 @@
 var Geometry = OZ.Class();
-
+Geometry.URL = "ws://" + location.hostname + ":8888/geometry";
 Geometry.prototype.init = function() {
-	this._id = Math.random().toString().replace(/\./g, "");
-	this._socket = new WebSocket("ws://localhost:8888/geometry");
-	OZ.Event.add(this._socket, "message", this._message.bind(this));
+	this._socket = null;
 	this._playing = false;
 	this._timer = null;
 	this._ts = 0; /* target timestamp */
@@ -54,6 +52,7 @@ Geometry.prototype._showJoin = function() {
 	this._canvas.deleteOldData();
 	this._dom.game.style.display = "none";
 	this._dom.join.style.display = "";
+	OZ.$("url").value = this.constructor.URL;
 }
 
 Geometry.prototype._showGame = function() {
@@ -65,11 +64,6 @@ Geometry.prototype._showGame = function() {
 Geometry.prototype._send = function(type, data) {
 	data.type = type;
 	this._socket.send(JSON.stringify(data));
-}
-
-Geometry.prototype._join = function(nick, color, length, game) {
-	var data = {name:nick, color:color, game:game, length:length};
-	this._send("join", data);
 }
 
 Geometry.prototype._error = function(reason) {
@@ -159,9 +153,23 @@ Geometry.prototype._clickJoin = function(e) {
 	game = game.value;
 	var color = OZ.$("color").value;
 	var length = OZ.$("length").value;
+	var url = OZ.$("url").value;
 
 	this._canvas.setColor(color);
-	this._join(nick, color, length, game);
+	this._joinData = {name:nick, color:color, game:game, length:length};
+
+	this._socket = new (window.WebSocket || window.MozWebSocket)(url);
+	OZ.Event.add(this._socket, "message", this._message.bind(this));
+	OZ.Event.add(this._socket, "open", this._open.bind(this));
+	OZ.Event.add(this._socket, "error", this._error.bind(this));
+}
+
+Geometry.prototype._open = function() {
+	this._send("join", this._joinData);
+}
+
+Geometry.prototype._error = function() {
+	alert("Websocket communication error");
 }
 
 Geometry.prototype._timerStep = function() {
