@@ -9,7 +9,7 @@ GS.prototype.path = "/geometry";
 GS.prototype.onmessage = function(client, data) {
 	data = JSON.parse(data);
 	var type = data.type;
-	system.stdout.writeLine("[message] " + type + " from " + client);
+	console.log("[message] " + type + " from " + client);
 	
 	switch (type) {
 		case "join":
@@ -41,7 +41,7 @@ GS.prototype.onidle = function() {
 }
 
 GS.prototype._debug = function(str) {
-	system.stdout.writeLine(str);
+	console.log(str);
 }
 
 GS.prototype._join = function(client, data) {
